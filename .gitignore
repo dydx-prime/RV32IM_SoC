@@ -10,3 +10,4 @@
 *.rc
 
 riscv-formal/
+rv_formal_bk/**/checks/
