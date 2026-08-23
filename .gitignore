@@ -11,3 +11,4 @@
 
 riscv-formal/
 rv_formal_bk/**/checks/
+obj_dir/
