@@ -1,0 +1,12 @@
+*.vcd
+*.fsdb
+*.wlf
+*.eda
+*.lst
+*.log
+*.vpd
+*.key
+*.history
+*.rc
+
+checks/
