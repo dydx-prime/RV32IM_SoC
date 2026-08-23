@@ -9,4 +9,4 @@
 *.history
 *.rc
 
-checks/
+riscv-formal/
