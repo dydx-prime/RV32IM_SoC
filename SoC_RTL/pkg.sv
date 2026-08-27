@@ -1,3 +1,5 @@
+`ifndef PKG_SV
+`define PKG_SV
 package pkg;
   //------ mux sources 
   localparam [2:0] NONE = 3'b000;
@@ -54,16 +56,8 @@ package pkg;
   localparam [2:0] BGEU = 3'b111;
 
   //----------------- opcodes
-  localparam [6:0] OPCODE_LUI = 7'b0110111;
-  localparam [6:0] OPCODE_AUIPC = 7'b0010111;
-  localparam [6:0] OPCODE_JAL = 7'b1101111;
-  localparam [6:0] OPCODE_JALR = 7'b1100111;
-  localparam [6:0] OPCODE_BRANCH = 7'b1100011;
-  localparam [6:0] OPCODE_LOAD = 7'b0000011;
-  localparam [6:0] OPCODE_STORE = 7'b0100011;
-  localparam [6:0] OPCODE_ITYPE = 7'b0010011;
-  localparam [6:0] OPCODE_RTYPE = 7'b0110011;
-  localparam [6:0] OPCODE_FENCE_PAUSE = 7'b0001111;
-  localparam [6:0] OPCODE_ECALL_EBREAK = 7'b1110011;
+
 
 endpackage
+
+`endif

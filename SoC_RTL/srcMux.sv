@@ -18,7 +18,25 @@ module srcMux(
   output reg [31:0] srcData
 );
   
-  import pkg::*;
+  // import pkg::*;
+  
+  //------ mux sources 
+  localparam [2:0] NONE = 3'b000;
+  
+  // alu srcA
+  localparam [2:0] ALU_INPUT_RS1    = 3'b001;
+  localparam [2:0] ALU_INPUT_PC     = 3'b010;
+  
+  // alu srcB
+  localparam [2:0] ALU_INPUT_RS2    = 3'b001;
+  localparam [2:0] ALU_INPUT_IMM    = 3'b010;
+  
+  // register file write data
+  localparam [2:0] REGFILE_LUI        = 3'b001;
+  localparam [2:0] REGFILE_JUMP       = 3'b010;
+  localparam [2:0] REGFILE_DATAMEM    = 3'b011;
+  localparam [2:0] REGFILE_ALURESULT  = 3'b100;
+
 
   always_comb begin
     srcData = 32'b0;

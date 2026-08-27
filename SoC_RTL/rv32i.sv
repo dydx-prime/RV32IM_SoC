@@ -1,4 +1,4 @@
-module rv32i #(parameter MEMFILE = "prog.dat")(
+module rv32i #(parameter MEMFILE = "./../testbenches/prog.dat")(
   input clk,
   input reset,
   input uart_ready,

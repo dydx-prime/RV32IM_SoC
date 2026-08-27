@@ -34,7 +34,7 @@ module dataMemory(
   assign uart_valid = isMemWrite & is_uart_tx;
   assign uart_wdata  = rs2Data[7:0];
 
-  logic [31:0] memory [0:4095];
+  logic [31:0] memory [0:12]; // 4096
   logic [31:0] word;
   logic [15:0] loadedHalf;
   logic [7:0] loadedByte;
@@ -101,9 +101,10 @@ module dataMemory(
       if(byteEnable[3]) memory[dmem_index] [31:24] <= memoryWriteData[31:24];
     end
   end
-
-  initial begin
-    $readmemh("data.dat", memory);
-  end
+  
+  
+  // initial begin
+  //   $readmemh("data.dat", memory);
+  // end
 endmodule
 

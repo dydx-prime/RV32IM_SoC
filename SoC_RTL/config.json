@@ -1,0 +1,27 @@
+{
+  "DESIGN_NAME": "SoC",
+  "VERILOG_FILES": "dir::*.sv",
+  "CLOCK_PORT": "clk",
+
+  "_comment_clock_period": "Start with a conservative (slow) target period in ns. If timing passes cleanly (WNS >= 0), lower this and re-run to find the real limit. E.g. 20.0 = 50MHz; try progressively smaller values (10.0, 5.0, 2.0...) once a run succeeds.",
+  "CLOCK_PERIOD": 40.0,
+
+  "_comment_reset": "reset is active-high per your rv32i.sv/SoC.sv -- OpenLane doesn't need this declared explicitly unless you're doing DFT, safe to leave default.",
+
+  "FP_SIZING": "absolute",
+  "DIE_AREA": "0 0 2000 2000",
+
+  "_comment_die_area": "Starting guess -- if floorplan/placement fails with 'design does not fit', increase this. If it succeeds with huge unused whitespace, shrink it for tighter (more realistic) Fmax results, since excess whitespace can artificially help routing/timing.",
+
+  "PL_TARGET_DENSITY_PCT": 80,
+
+  "SYNTH_STRATEGY": "AREA 0",
+  "_comment_synth_strategy": "AREA 0 favors area over aggressive timing optimization by default -- fine for a first pass. Switch to a DELAY-focused strategy (e.g. 'DELAY 0') if you want OpenLane to try harder for a lower Fmax number specifically, at the cost of area/runtime.",
+
+  "RUN_CTS": true,
+
+  "_comment_multiplier_note": "If your design uses any inferred multiply/divide (it shouldn't, given RV32I with no M-extension -- but check alu.sv), synthesis may pull in large multiplier macros that dominate area/timing. Flag this to Claude if synthesis area looks surprisingly large.",
+
+  "_comment_readmemh": "imem.sv/dataMemory.sv use $readmemh, which is simulation-only. Trying synthesis as-is first: Yosys will likely either (a) synthesize the memory as flip-flop-based storage and silently ignore/warn about $readmemh since it has no synthesis meaning, or (b) throw an explicit error naming the construct it can't handle. If (b) happens, paste the exact Yosys error back and it's a quick fix -- wrap the $readmemh in `ifndef SYNTHESIS or move it into a separate sim-only file that isn't included in VERILOG_FILES for this flow."
+}
+

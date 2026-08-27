@@ -1,0 +1,13 @@
+read_verilog -sv SoC.sv rv32i.sv corescore_emitter_uart.sv alu.sv branchUnit.sv controlUnit.sv dataMemory.sv imem.sv instrDecoder.sv pc.sv pc4.sv regfile.sv srcMux.sv
+
+hierarchy -top SoC
+
+proc
+memory
+
+synth
+flatten
+stat
+
+show -format svg -prefix netlist_image
+

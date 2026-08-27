@@ -8,7 +8,14 @@ module branchUnit (
   output reg branchTaken,
   output reg [31:0] branchAddress
 );
-  import pkg::*;
+  //import pkg::*;
+  localparam [2:0] BEQ = 3'b000;
+  localparam [2:0] BNE = 3'b001;
+  localparam [2:0] BLT = 3'b100;
+  localparam [2:0] BGE = 3'b101;
+  localparam [2:0] BLTU = 3'b110;
+  localparam [2:0] BGEU = 3'b111;
+
   always_comb begin
     branchTaken = 1'b0;
     branchAddress = pc + imm;
