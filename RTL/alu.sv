@@ -25,6 +25,6 @@ module alu(
     endcase
   end
   
-  assign resultIsZero = (aluResult == 32'b0); 
+  assign resultIsZero = (aluResult == 32'b0);
 
 endmodule

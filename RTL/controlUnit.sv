@@ -3,7 +3,8 @@ module controlUnit(
   input [6:0] funct7,
   input [2:0] funct3,
   input [31:0] imm,
- 
+  
+  output logic isCSR,
   output logic isBranch,
   output logic isJump,
   output logic isMemRead,
@@ -17,9 +18,8 @@ module controlUnit(
 
   import pkg::*;
   
-  // SRAI, SRLI, SLLI
-  
   always @(*) begin
+    isCSR                 = 1'b0;
     isBranch              = 1'b0;
     isJump                = 1'b0;
     isMemRead             = 1'b0;
@@ -84,10 +84,17 @@ module controlUnit(
         aluInputSrcA = ALU_INPUT_RS1;
         aluInputSrcB = ALU_INPUT_RS2;
       end
-      FENCE_PAUSE, ECALL_EBREAK:/* keep signals at zero */ ;
+      FENCE_PAUSE: /* keep signals at zero */;
+
+      SYSTEM: begin // or environment
+        isCSR = (funct3 != 3'b0);
+        aluInputSrcA = funct3[2] ? ALU_INPUT_UIMM : ALU_INPUT_RS1;
+        aluInputSrcB = (funct3 == CSRRS || funct3 == CSRRC || funct3 == CSRRSI || funct3 == CSRRCI) ?
+                       ALU_INPUT_CSR : NONE;
+      end
     endcase 
   end
-
+  
   always @(*) begin
     aluSel = ALU_NOP;
     case(opcode)
@@ -95,9 +102,9 @@ module controlUnit(
       
       BRANCH: begin
         case(funct3)
-          BEQ, BNE: aluSel = ALU_SUB; //BEQ, BNE
-          BLT, BGE: aluSel = ALU_SLT; // BLT, BGE
-          BLTU, BGEU: aluSel = ALU_SLTU; // BLTU, BGEU
+          BEQ, BNE: aluSel = ALU_SUB; 
+          BLT, BGE: aluSel = ALU_SLT;
+          BLTU, BGEU: aluSel = ALU_SLTU; 
           default: aluSel = ALU_NOP;
         endcase
       end

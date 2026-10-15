@@ -1,7 +1,7 @@
 // one module definition shared between alu sources and regfile data write
 //
 // srcA selects between rs1 and pc, so data2 and 3 are tied to zero when instantiated
-// srcB selects between rs2, imm, shamt so data3 is set to zero when instantiated
+// srcB selects between rs2, imm so data3 is set to zero when instantiated
 // regfile write selects between lui, jump, data memory and alu result
 //
 // each case has the same values. to increase readability, they are set to
