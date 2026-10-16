@@ -8,9 +8,17 @@
 *.key
 *.history
 *.rc
+*.jou
+*.str
 
 riscv-formal/
 rv_formal_bk/**/checks/
 obj_dir/
 
 SoC_RTL/runs
+
+# Vivado
+vivado/ip/**
+!/vivado/ip/**/
+!vivado/ip/**/*.xci
+vivado/pj.*

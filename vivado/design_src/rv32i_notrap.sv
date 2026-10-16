@@ -28,7 +28,7 @@ module rv32i_notrap #(parameter MEMFILE = "instr.mem")(
 );
  
  wire clk;
- // 50 MHz clock
+ // 65 MHz clock
  clk_wiz_0 mcm (.clk_in1(clk_100_MHz), .clk_out1(clk)); 
   
   logic [31:0] nextPC, nextPC_aligned;
@@ -157,7 +157,7 @@ module rv32i_notrap #(parameter MEMFILE = "instr.mem")(
     .resultIsZero(resultIsZero)
   );
 
-  dataMemory #(.clk_freq_hz(50_000_000), .baud(115200)) dmem(
+  dataMemory #(.clk_freq_hz(60_000_000), .baud(115200)) dmem(
     .clk(clk),
     .rst(reset),
     .isMemRead(isMemRead),

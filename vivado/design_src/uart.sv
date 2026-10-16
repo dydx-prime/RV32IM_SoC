@@ -32,8 +32,6 @@ module uart
    input wire 	    i_valid,
    output reg 	    o_ready,
    output wire 	    o_uart_tx);
-   
-   initial begin cnt = 0; data = 0; o_ready = 0; end
 
    localparam START_VALUE = clk_freq_hz/baud_rate;
    
@@ -42,6 +40,8 @@ module uart
    reg [WIDTH:0]  cnt;
    
    reg [9:0] 	    data;
+   
+   initial begin cnt = 0; data = 0; o_ready = 0; end
 
    assign o_uart_tx = data[0] | !(|data);
 
